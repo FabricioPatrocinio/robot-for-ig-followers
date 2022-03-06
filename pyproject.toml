@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "robot_for_ig_followers"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["FabricioPatrocinio <fabricioschiffer@gmail.com>"]
 

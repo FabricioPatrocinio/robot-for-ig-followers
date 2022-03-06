@@ -17,7 +17,7 @@ async def unfollow_people(show_browser: bool = True):
 
         # await page.wait_for_timeout(3000)
         info('Loading page...')
-        process_progress(milliseconds=3000)
+        process_progress(milliseconds=4000)
 
         await page.goto(settings.SITE)
 
@@ -37,7 +37,7 @@ async def unfollow_people(show_browser: bool = True):
 
         # await page.wait_for_timeout(1000)
         info('Loading page...')
-        process_progress(milliseconds=1000)
+        process_progress(milliseconds=1200)
 
         await page.locator('text=Agora não').click()
 
@@ -64,27 +64,30 @@ async def unfollow_people(show_browser: bool = True):
 
         info('Unfollowing people...')
 
-        count = 0
+        # Number of followers that load in a time interval
+        count = 1
 
         # progress bar
         with alive_bar(settings.UNFALLOW_PEOPLE, bar='blocks') as bar:
             for number in follow_range:
+                await page.wait_for_timeout(250)
+
                 unfallowers = f'//html/body/div[6]/div/div/div/div[3]/ul/div/li[{number}]/div/div[3]/button'
+
                 await page.click(unfallowers)
 
-                await page.wait_for_timeout(200)
+                await page.wait_for_timeout(400)
 
                 unfollow = '//html/body/div[7]/div/div/div/div[3]/button[1]'
                 await page.click(unfollow)
 
-                await page.wait_for_timeout(200)
+                await page.wait_for_timeout(250)
 
-                # Number of followers that load in a time interval
-                count = 0 if count >= 10 else count
+                if count >= 12:
+                    count = 0
+                    await page.wait_for_timeout(5000)
+
                 count += 1
-
-                if count >= 10:
-                    await page.wait_for_timeout(1000)
 
                 bar()
 

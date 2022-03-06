@@ -17,7 +17,7 @@ async def follow_people(show_browser: bool = True):
 
         # await page.wait_for_timeout(3000)
         info('Loading page...')
-        process_progress(milliseconds=3000)
+        process_progress(milliseconds=4000)
 
         await page.goto(settings.SITE)
 
@@ -61,7 +61,7 @@ async def follow_people(show_browser: bool = True):
 
                 await page.click(fallowers)
 
-                await page.wait_for_timeout(400)
+                await page.wait_for_timeout(500)
 
                 bar()
 
