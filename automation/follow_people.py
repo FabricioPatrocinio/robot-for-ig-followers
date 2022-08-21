@@ -31,9 +31,9 @@ async def follow_people(show_browser: bool = True):
 
         info('Login successfully!')
 
-        save_password = '//*[@id="react-root"]/section/main/div/div/div/div/button'
+        #save_password = '//*[@id="react-root"]/section/main/div/div/div/div/button'
 
-        await page.click(save_password)
+        #await page.click(save_password)
 
         # await page.wait_for_timeout(1000)
         info('Loading page...')
@@ -46,7 +46,7 @@ async def follow_people(show_browser: bool = True):
         info('Loading a little bit of the page...')
         process_progress(milliseconds=3000)
 
-        view_all = '//*[@id="react-root"]/section/main/section/div[3]/div[2]/div[1]/a/div'
+        view_all = '//html/body/div[1]/div/div/div/div[1]/div/div/div/div[1]/div[1]/section/main/div[1]/section/div[3]/div[2]/div[1]/a'
 
         # Suggestions for you, see all
         await page.click(view_all)
@@ -57,11 +57,11 @@ async def follow_people(show_browser: bool = True):
 
         with alive_bar(settings.FALLOW_PEOPLE, bar='blocks') as bar:
             for number in follow_range:
-                fallowers = f'//html/body/div[1]/section/main/div/div[2]/div/div/div[{number}]/div[3]/button'
+                fallowers = f'//html/body/div[1]/div/div/div/div[1]/div/div/div/div[1]/div[1]/section/main/div/div[2]/div/div/div[{number}]/div[3]/button'
 
                 await page.click(fallowers)
 
-                await page.wait_for_timeout(500)
+                await page.wait_for_timeout(700)
 
                 bar()
 
